@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 from celer.plot_utils import configure_plt
 
 
-# SAVEFIG = False
-SAVEFIG = True
+SAVEFIG = False
+# SAVEFIG = True
 figname = "meg_rcv1_news20_MSD"
 # figname = "finance"
 # figname = "rcv1_news20"
@@ -88,9 +88,7 @@ DICT_YLABEL = {
 DICT_YTICKS = {
     'libsvm[dataset=rcv1.binary]': [1e3, 1, 1e-3, 1e-6],
     'libsvm[dataset=news20.binary]': [1e3, 1, 1e-3, 1e-6],
-    'libsvm[dataset=kdda_train]': [1e3, 1, 1e-3, 1e-6],
-    'leukemia': [1e1, 1e-2, 1e-5, 1e-8],
-    'MEG': [1e1, 1e-2, 1e-5, 1e-8],
+    'MEG': [1e2, 1e1, 1],
     "lars_adversarial[n_samples=100]": [1e1, 1e-2, 1e-5, 1e-8],
     "lars_adversarial[n_samples=1000]": [1e1, 1e-2, 1e-5, 1e-8],
     "libsvm[dataset=YearPredictionMSD]": [1e7, 1e4, 1e1, 1e-2, 1e-5],
@@ -192,6 +190,8 @@ for idx_data, dataset in enumerate(datasets):
         dataset_label = dataset
     axarr[idx_data, 0].set_ylabel(DICT_YLABEL[dataset], fontsize=labelsize)
     axarr[idx_data, 0].set_yticks(DICT_YTICKS[dataset])
+    axarr[idx_data, 0].set_ylim([1, ax.get_ylim()[1]])
+
 
 # fig1.suptitle(regex.sub('', objective), fontsize=titlesize)
 plt.show(block=False)
@@ -215,8 +215,8 @@ width = legend.get_window_extent().width
 height = legend.get_window_extent().height
 fig2.set_size_inches((width / 80,  max(height / 80, 0.5)))
 plt.axis('off')
-# plt.show(block=False)
-plt.show()
+plt.show(block=False)
+# plt.show()
 
 # if SAVEFIG:
 #     fig1_name = f"figures/{figname}.pdf"
