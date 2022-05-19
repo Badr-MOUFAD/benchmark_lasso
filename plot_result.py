@@ -41,7 +41,7 @@ SOLVERS = {
     'cuml[qn]': 'cuML[qn]',
     'glmnet': 'glmnet',
     'lars': "LARS",
-    'lasso_jl': "lasso\_jl",
+    'lasso_jl': "lasso.jl",
     'Lightning': 'lightning',
     'ModOpt-FISTA[restart_strategy=adaptive-1]': 'FISTA[adaptive-1]',
     'ModOpt-FISTA[restart_strategy=greedy]': 'FISTA[greedy]',
@@ -229,13 +229,13 @@ plt.axis('off')
 plt.show(block=False)
 # plt.show()
 
-# if SAVEFIG:
-#     fig1_name = f"figures/{figname}.pdf"
-#     fig1.savefig(fig1_name)
-#     os.system(f"pdfcrop {fig1_name} {fig1_name}")
-#     fig1.savefig(f"figures/{figname}.svg")
+if SAVEFIG:
+    fig1_name = f"figures/{figname}.pdf"
+    fig1.savefig(fig1_name)
+    os.system(f"pdfcrop {fig1_name} {fig1_name}")
+    fig1.savefig(f"figures/{figname}.svg")
 
-#     fig2_name = f"figures/{figname}_legend.pdf"
-#     fig2.savefig(fig2_name)
-#     os.system(f"pdfcrop {fig2_name} {fig2_name}")
-#     fig2.savefig(f"figures/{figname}_legend.svg")
+    fig2_name = f"figures/{figname}_legend.pdf"
+    fig2.savefig(fig2_name)
+    os.system(f"pdfcrop {fig2_name} {fig2_name}")
+    fig2.savefig(f"figures/{figname}_legend.svg")
