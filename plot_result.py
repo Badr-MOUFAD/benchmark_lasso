@@ -91,7 +91,7 @@ DICT_YTICKS = {
     'MEG': [1e2, 1e1, 1],
     "lars_adversarial[n_samples=100]": [1e1, 1e-2, 1e-5, 1e-8],
     "lars_adversarial[n_samples=1000]": [1e1, 1e-2, 1e-5, 1e-8],
-    "libsvm[dataset=YearPredictionMSD]": [1e7, 1e4, 1e1, 1e-2, 1e-5],
+    "libsvm[dataset=YearPredictionMSD]": [100, 10, 1],
 }
 
 DICT_XTICKS = {
