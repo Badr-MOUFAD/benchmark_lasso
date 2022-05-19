@@ -86,8 +86,8 @@ DICT_YLABEL = {
 }
 
 DICT_YTICKS = {
-    'libsvm[dataset=rcv1.binary]':       [1e0, 1e-2, 1e-3],
-    'libsvm[dataset=news20.binary]':     [1e-3, 1e-4, 1e-5],
+    'libsvm[dataset=rcv1.binary]':       [1e0, 1e-1, 1e-2, 1e-3],
+    'libsvm[dataset=news20.binary]':     [1e0, 1e-1, 1e-2, 1e-3, 1e-4, 1e-5],
     'libsvm[dataset=kdda_train]':        [1e0, 0.5, 0.1, 0.01],
     'leukemia':                          [1e0, 0.5, 0.1, 0.01],
     'MEG':                               [1e0, 1e-1, 1e-2, 1e-3],
@@ -109,7 +109,7 @@ DICT_XTICKS = {
 DICT_N_FEATURES = {
     'MEG': 7498,
     "libsvm[dataset=news20.binary]": 1355191,
-    "libsvm[dataset=rcv1.binary]": 19959,
+    "libsvm[dataset=rcv1.binary]": 47236,
     "libsvm[dataset=YearPredictionMSD]": 90
 }
 
