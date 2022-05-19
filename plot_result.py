@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 from celer.plot_utils import configure_plt
 
 
-SAVEFIG = False
-# SAVEFIG = True
+# SAVEFIG = False
+SAVEFIG = True
 figname = "meg_rcv1_news20_MSD"
 # figname = "finance"
 # figname = "rcv1_news20"
@@ -86,12 +86,14 @@ DICT_YLABEL = {
 }
 
 DICT_YTICKS = {
-    'libsvm[dataset=rcv1.binary]': [1e3, 1, 1e-3, 1e-6],
-    'libsvm[dataset=news20.binary]': [1e3, 1, 1e-3, 1e-6],
-    'MEG': [1e2, 1e1, 1],
-    "lars_adversarial[n_samples=100]": [1e1, 1e-2, 1e-5, 1e-8],
-    "lars_adversarial[n_samples=1000]": [1e1, 1e-2, 1e-5, 1e-8],
-    "libsvm[dataset=YearPredictionMSD]": [100, 10, 1],
+    'libsvm[dataset=rcv1.binary]':       [1e0, 1e-2, 1e-3],
+    'libsvm[dataset=news20.binary]':     [1e-3, 1e-4, 1e-5],
+    'libsvm[dataset=kdda_train]':        [1e0, 0.5, 0.1, 0.01],
+    'leukemia':                          [1e0, 0.5, 0.1, 0.01],
+    'MEG':                               [1e0, 1e-1, 1e-2, 1e-3],
+    "lars_adversarial[n_samples=100]":   [1e0, 0.5, 0.1, 0.01],
+    "lars_adversarial[n_samples=1000]":  [1e0, 0.5, 0.1, 0.01],
+    "libsvm[dataset=YearPredictionMSD]": [1e0, 1e-1, 1e-2],
 }
 
 DICT_XTICKS = {
@@ -103,6 +105,14 @@ DICT_XTICKS = {
     'MEG': np.geomspace(1e-2, 1e3, 6),
     "libsvm[dataset=YearPredictionMSD]": np.geomspace(1e-2, 1e1, 4),
 }
+
+DICT_N_FEATURES = {
+    'MEG': 7498,
+    "libsvm[dataset=news20.binary]": 1355191,
+    "libsvm[dataset=rcv1.binary]": 19959,
+    "libsvm[dataset=YearPredictionMSD]": 90
+}
+
 
 configure_plt()
 CMAP = plt.get_cmap('tab20')
@@ -165,7 +175,8 @@ for idx_data, dataset in enumerate(datasets):
 
             q1 = df3.groupby('stop_val')['time'].quantile(.1)
             q9 = df3.groupby('stop_val')['time'].quantile(.9)
-            y = curve["objective_support_size"] - c_star
+            y = (curve["objective_support_size"] -
+                 c_star) / DICT_N_FEATURES[dataset]
 
             ax.loglog(
                 curve["time"], y, color=style[solver_name][0],
@@ -178,6 +189,8 @@ for idx_data, dataset in enumerate(datasets):
         axarr[0, idx_obj].set_title(
             # '\n'.join(regex.search(objective).group(1).split(",")), fontsize=fontsize - 2)
             DICT_TITLE[objective], fontsize=labelsize)
+        axarr[idx_data, 0].set_ylim(
+            [1 / DICT_N_FEATURES[dataset], ax.get_ylim()[1]])
 
         ax.grid()
         ax.set_xticks(DICT_XTICKS[dataset])
@@ -190,8 +203,6 @@ for idx_data, dataset in enumerate(datasets):
         dataset_label = dataset
     axarr[idx_data, 0].set_ylabel(DICT_YLABEL[dataset], fontsize=labelsize)
     axarr[idx_data, 0].set_yticks(DICT_YTICKS[dataset])
-    axarr[idx_data, 0].set_ylim([1, ax.get_ylim()[1]])
-
 
 # fig1.suptitle(regex.sub('', objective), fontsize=titlesize)
 plt.show(block=False)
