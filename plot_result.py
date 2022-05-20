@@ -9,7 +9,7 @@ from celer.plot_utils import configure_plt
 
 # SAVEFIG = False
 SAVEFIG = True
-figname = "meg_rcv1_news20_MSD"
+figname = "support_meg_rcv1_news20_MSD"
 # figname = "finance"
 # figname = "rcv1_news20"
 
@@ -178,10 +178,15 @@ for idx_data, dataset in enumerate(datasets):
             y = (curve["objective_support_size"] -
                  c_star) / DICT_N_FEATURES[dataset]
 
+            linestyle = '-'
+            if solver_name in ("snapml[gpu=True]", "cuml[qn]", "cuml[cd]"):
+                linestyle = '--'
+
             ax.loglog(
                 curve["time"], y, color=style[solver_name][0],
                 marker=style[solver_name][1], markersize=6,
-                label=SOLVERS[solver_name], linewidth=2, markevery=3)
+                label=SOLVERS[solver_name], linewidth=2, markevery=3,
+                linestyle=linestyle)
 
         ax.set_xlim([DICT_XLIM.get(dataset, MIN_XLIM), ax.get_xlim()[1]])
         axarr[len(datasets)-1, idx_obj].set_xlabel("Time (s)",
