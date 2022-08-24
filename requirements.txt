@@ -1,0 +1,4 @@
+git+https://github.com/benchopt/benchopt.git@main
+git+https://github.com/Badr-MOUFAD/skglm.git@gram-solver
+libsvm
+celer
