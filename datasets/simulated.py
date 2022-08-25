@@ -15,19 +15,21 @@ class Dataset(BaseDataset):
             (10_000, 150),
             (100_000, 200)
         ],
+        'X_density': [1., 0.5]
     }
 
-    def __init__(self, n_samples=10, n_features=50, random_state=27):
+    def __init__(self, n_samples=10, n_features=50, X_density=1., random_state=27):
         # Store the parameters of the dataset
         self.n_samples = n_samples
         self.n_features = n_features
+        self.X_density = X_density
         self.random_state = random_state
 
     def get_data(self):
         rng = np.random.RandomState(self.random_state)
 
         X, y, _ = make_correlated_data(self.n_samples, self.n_features,
-                                       random_state=rng)
+                                       random_state=rng, X_density=self.X_density)
 
         data = dict(X=X, y=y)
 

@@ -12,11 +12,13 @@ class Solver(BaseSolver):
     name = "skglm-gram"
 
     parameters = {
-        'use_acc': [True, False]
+        'use_acc': [True, False],
+        'greedy_cd': [True, False]
     }
 
-    def __init__(self, use_acc):
+    def __init__(self, use_acc, greedy_cd):
         self.use_acc = use_acc
+        self.greedy_cd = greedy_cd
 
     def set_objective(self, X, y, lmbd, fit_intercept):
         self.X, self.y, self.lmbd = X, y, lmbd
@@ -31,7 +33,8 @@ class Solver(BaseSolver):
     def run(self, n_iter):
         self.coef = gram_cd_solver(self.X, self.y, self.l1_penalty,
                                    tol=1e-12, verbose=0, max_iter=n_iter,
-                                   use_acc=self.use_acc)[0]
+                                   use_acc=self.use_acc,
+                                   greedy_cd=self.greedy_cd)[0]
 
     def get_result(self):
         return self.coef
