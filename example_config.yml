@@ -1,14 +1,19 @@
 objective:
   - Lasso Regression[fit_intercept=False,reg=0.1]
+  - Lasso Regression[fit_intercept=False,reg=0.01]
 
 dataset: # dataset to run benchmark on
   - leukemia
+  - libsvm
+  - MEG
+  - Simulated
 
 solver: # list of example solvers to do benchmark
-  - python-pgd[use_acceleration=True]
-  - sklearn
-  - lars
+  - skglm
+  - cd-aa
+  - cd
 
 # note: use more repetitions to have quantiles on the plot
+n-jobs: 15
 n-repetitions: 1
-max-runs: 20
+max-runs: 100
