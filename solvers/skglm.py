@@ -14,7 +14,7 @@ class Solver(BaseSolver):
 
     install_cmd = 'conda'
     requirements = [
-        'pip:skglm'
+        'pip:git+https://github.com/Badr-MOUFAD/skglm.git@cd-aa'
     ]
     references = [
         'Q. Bertrand and Q. Klopfenstein and P.-A. Bannier and G. Gidel'
@@ -36,7 +36,7 @@ class Solver(BaseSolver):
         warnings.filterwarnings('ignore', category=ConvergenceWarning)
         n_samples = self.X.shape[0]
         self.lasso = Lasso(
-            alpha=self.lmbd / n_samples, max_iter=1, max_epochs=50_000,
+            alpha=self.lmbd / n_samples, max_iter=1, max_epochs=1,
             tol=1e-12, fit_intercept=False, warm_start=False, verbose=False)
 
         # Cache Numba compilation
@@ -46,7 +46,7 @@ class Solver(BaseSolver):
         if n_iter == 0:
             self.coef = np.zeros([self.X.shape[1] + self.fit_intercept])
         else:
-            self.lasso.max_iter = n_iter
+            self.lasso.max_epochs = n_iter
             self.lasso.fit(self.X, self.y)
 
             coef = self.lasso.coef_.flatten()
