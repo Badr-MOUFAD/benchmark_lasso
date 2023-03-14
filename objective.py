@@ -6,11 +6,11 @@ from benchopt import BaseObjective
 
 class Objective(BaseObjective):
     min_benchopt_version = "1.3"
-    name = "Lasso Regression"
+    name = "Lasso-FISTA"
 
     parameters = {
-        'fit_intercept': [True, False],
-        'reg': [.5, .1, .05],
+        'fit_intercept': [False],
+        'reg': [1e-3],
     }
 
     def __init__(self, reg=.1, fit_intercept=False):
