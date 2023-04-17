@@ -5,9 +5,10 @@ from benchopt import safe_import_context
 
 
 with safe_import_context() as import_ctx:
-    import numpy as np
     from skglm.gpu.solvers import NumbaSolver
-    from sklearn.exceptions import ConvergenceWarning
+    from skglm.gpu.solvers.numba_solver import QuadraticNumba, L1Numba
+
+    from numba.core.errors import NumbaPerformanceWarning
 
 
 class Solver(BaseSolver):
@@ -18,15 +19,17 @@ class Solver(BaseSolver):
         self.X, self.y, self.lmbd = X, y, lmbd
         self.fit_intercept = fit_intercept
 
-        warnings.filterwarnings('ignore', category=ConvergenceWarning)
+        warnings.filterwarnings('ignore', category=NumbaPerformanceWarning)
         self.solver = NumbaSolver()
+        self.datafit = QuadraticNumba()
+        self.penalty = L1Numba(lmbd / len(y))
 
         # cache numba compilation
-        self.run(2)
+        self.run(5)
 
     def run(self, n_iter):
         self.solver.max_iter = n_iter
-        self.coef = self.solver.solve(self.X, self.y, self.lmbd)
+        self.coef = self.solver.solve(self.X, self.y, self.datafit, self.penalty)
 
     @staticmethod
     def get_next(previous):

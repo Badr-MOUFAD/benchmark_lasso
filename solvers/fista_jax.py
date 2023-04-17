@@ -1,12 +1,10 @@
-import warnings
-
 from benchopt import BaseSolver
 from benchopt import safe_import_context
 
 
 with safe_import_context() as import_ctx:
-    import numpy as np
     from skglm.gpu.solvers import JaxSolver
+    from skglm.gpu.solvers.jax_solver import QuadraticJax, L1Jax
 
 
 class Solver(BaseSolver):
@@ -25,13 +23,15 @@ class Solver(BaseSolver):
         self.fit_intercept = fit_intercept
 
         self.solver = JaxSolver(use_auto_diff=self.use_auto_diff)
+        self.datafit = QuadraticJax()
+        self.penalty = L1Jax(lmbd / len(y))
 
-        # cache jxa grad autodiff compilation
-        self.run(2)
+        # cache jax grad autodiff compilation
+        self.run(5)
 
     def run(self, n_iter):
         self.solver.max_iter = n_iter
-        self.coef = self.solver.solve(self.X, self.y, self.lmbd)
+        self.coef = self.solver.solve(self.X, self.y, self.datafit, self.penalty)
 
     @staticmethod
     def get_next(previous):
