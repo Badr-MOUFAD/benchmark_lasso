@@ -3,6 +3,7 @@ from benchopt import safe_import_context
 
 
 with safe_import_context() as import_ctx:
+    from scipy import sparse
     from skglm.gpu.solvers.pytorch_solver import (PytorchSolver, L1Pytorch,
                                                   QuadraticPytorch)
 
@@ -40,3 +41,9 @@ class Solver(BaseSolver):
 
     def get_result(self):
         return self.coef
+
+    def skip(self, X, y, lmbd, fit_intercept):
+        if sparse.issparse(X) and not self.use_auto_diff:
+            return True, "PyTorch doesn't support `X.T @ vec` for sparse matrices"
+
+        return False, ""
