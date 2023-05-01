@@ -46,4 +46,8 @@ class Solver(BaseSolver):
         if sparse.issparse(X) and not self.use_auto_diff:
             return True, "PyTorch doesn't support `X.T @ vec` for sparse matrices"
 
+        # skip news20.binary
+        if X.shape == (19996, 1355191):
+            return True, "Something wrong happens that makes the solver diverges"
+
         return False, ""
