@@ -16,7 +16,7 @@ with safe_import_context() as import_ctx:
 
 
 class Solver(BaseSolver):
-    name = "jax-opt"
+    name = "jax-opt-cd-aa"
     stopping_strategy = "iteration"
 
     def set_objective(self, X, y, lmbd, fit_intercept):
@@ -34,7 +34,8 @@ class Solver(BaseSolver):
                 datafit,
                 block_prox=prox.prox_lasso,
                 maxiter=1,
-                tol=1e-9
+                tol=1e-9,
+                jit=True
             ),
             ridge=1e-4,
             history_size=5
