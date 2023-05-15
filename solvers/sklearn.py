@@ -10,6 +10,26 @@ with safe_import_context() as import_ctx:
 
 
 class Solver(BaseSolver):
+    """Defacto machine learning package.
+
+    With a very long description
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    """
     name = 'sklearn'
 
     install_cmd = 'conda'

@@ -6,6 +6,12 @@ with safe_import_context() as import_ctx:
 
 
 class Solver(BaseSolver):
+    """Classical algorithm for smooth+non-smooth problems.
+
+    Lorem ipsum dolor sit amet. Qui quidem voluptates est nobis autem aut
+    impedit doloribus. Aut quod maxime qui porro architecto ea sequi nostrum es
+    """
+
     name = 'Python-PGD'  # proximal gradient, optionally accelerated
     stopping_strategy = "callback"
 
