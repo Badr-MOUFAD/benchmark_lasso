@@ -11,7 +11,7 @@ class Objective(BaseObjective):
     min_benchopt_version = "1.5"
 
     parameters = {
-        'fit_intercept': [True, False],
+        'fit_intercept': [False],
         'reg': [.5, .1, .05],
     }
 
